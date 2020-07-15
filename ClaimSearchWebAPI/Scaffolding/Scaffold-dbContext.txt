@@ -1,0 +1,8 @@
+﻿Scaffold-DbContext "Server=THOTA-X1; Database = UserRegistration; Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force
+
+
+IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+optionsBuilder.UseSqlServer(configuration.GetConnectionString("local"));
