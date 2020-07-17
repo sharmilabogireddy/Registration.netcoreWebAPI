@@ -19,6 +19,7 @@ namespace ClaimSearchWebAPI
 {
     public class Startup
     {
+        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,16 +31,17 @@ namespace ClaimSearchWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins",
+                                  builder => builder.WithOrigins("http://localhost:4200/")
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod()
+                                                    .AllowAnyOrigin()
+                                  );
+            });
             //services.AddSession();
 
-            /*services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-            }); */           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,9 +55,9 @@ namespace ClaimSearchWebAPI
             //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseCors("_myAllowSpecificOrigins");
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

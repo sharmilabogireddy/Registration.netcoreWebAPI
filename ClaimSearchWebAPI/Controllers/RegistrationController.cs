@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClaimSearchWebAPI.Models;
+using ClaimSearchWebAPI.dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using StackExchange.Redis;
 
 namespace ClaimSearchWebAPI.Controllers
 {
-    [Route("[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("[controller]")]
     public class RegistrationController : ControllerBase
     {
         private UserRegistrationContext dbContext = new UserRegistrationContext();
@@ -30,9 +33,10 @@ namespace ClaimSearchWebAPI.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost]      
         //POST: /Registration
-        public async Task<ActionResult> PostUser(Users user)
+        public IActionResult PostUser([FromBody]UserRegistrationModel user)
         {
             if (!ModelState.IsValid)
             {
@@ -40,16 +44,15 @@ namespace ClaimSearchWebAPI.Controllers
             }
             try
             {
-                var isExist = IsEmailExist(user.EmailId);
+                Console.WriteLine("inside postuser...." + user.userName);
+                var isExist = IsEmailExist(user.emailId);
                 if (isExist)
                 {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
-                    return BadRequest();
+                    return BadRequest(new { message = "User email is already exists." });
                 }
-                user.UserId = Guid.NewGuid();
-                //user.Password = Crypto.Hash(user.Password);
-                dbContext.Users.Add(user);
-                await dbContext.SaveChangesAsync();
+                //user.password = Crypto.Hash(user.password);
+               // dbContext.Users.Add(user);
+               // dbContext.SaveChangesAsync();
             }
             catch (Exception e)
             {

@@ -308,3 +308,4 @@ C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\stat
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.dll
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.pdb
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.genruntimeconfig.cache
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\libman.json
