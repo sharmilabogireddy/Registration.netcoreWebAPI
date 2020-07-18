@@ -298,8 +298,6 @@ C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\runt
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.AssemblyInfoInputs.cache
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.AssemblyInfo.cs
-C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.csproj.CoreCompileInputs.cache
-C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.RazorTargetAssemblyInfo.cache
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.csproj.CopyComplete
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\staticwebassets\ClaimSearchWebAPI.StaticWebAssets.Manifest.cache
@@ -309,3 +307,12 @@ C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\Clai
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.genruntimeconfig.cache
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\libman.json
 C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.csprojAssemblyReference.cache
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.csproj.CoreCompileInputs.cache
+C:\ASP.Net Core\ClaimSearchWebAPI\ClaimSearchWebAPI\obj\Debug\netcoreapp3.1\ClaimSearchWebAPI.MvcApplicationPartsAssemblyInfo.cache

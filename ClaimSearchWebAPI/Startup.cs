@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using ClaimSearchWebAPI.Services;
 using Microsoft.Extensions.Logging;
 using ClaimSearchWebAPI.Helper;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ClaimSearchWebAPI
 {
@@ -35,6 +38,27 @@ namespace ClaimSearchWebAPI
                                                     .AllowAnyMethod()
                                                     .AllowAnyOrigin()
                                   );
+            });
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.JwtSecret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
             });
             //services.AddSession();
             services.AddScoped<IUserService, UserService>();

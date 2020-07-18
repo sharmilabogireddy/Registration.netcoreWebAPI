@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using ClaimSearchWebAPI.dto;
 using ClaimSearchWebAPI.Models;
 using ClaimSearchWebAPI.Helper;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ClaimSearchWebAPI.Services
 {
@@ -52,32 +54,27 @@ namespace ClaimSearchWebAPI.Services
             // Load the related Role
             dbContext.Entry(user).Reference(u => u.Role).Load();
 
-            //var user = _users.
-
-
             // authentication successful so generate jwt token
-            /*var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.JwtSecret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.Role.RoleName),
+                    new Claim(ClaimTypes.Email, user.EmailId)
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);*/
-
-            dbContext.Entry(user).Reference(u => u.Role).Load();
+            string token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
 
             UserDto userDto = new UserDto
             {
                 Id = user.UserId,
                 UserName = user.UserName,
-                Token = "This is token",
+                Token = token,
                 Role = user.Role.RoleName
             };
             return userDto;
