@@ -19,20 +19,6 @@ namespace ClaimSearchWebAPI.Controllers
     {
         private UserRegistrationContext dbContext = new UserRegistrationContext();
 
-        [Route("[controller]")]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Users>>> GetStudents()
-        {
-            try
-            {
-                return await dbContext.Users.ToListAsync();
-
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
         [AllowAnonymous]
         [HttpPost]      
         //POST: /Registration
@@ -44,7 +30,6 @@ namespace ClaimSearchWebAPI.Controllers
             }
             try
             {
-                Console.WriteLine("inside postuser...." + user.userName);
                 var isExist = IsEmailExist(user.emailId);
                 if (isExist)
                 {

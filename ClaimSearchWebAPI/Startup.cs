@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ClaimSearchWebAPI.Services;
 using Microsoft.Extensions.Logging;
+using ClaimSearchWebAPI.Helper;
 
 namespace ClaimSearchWebAPI
 {
@@ -21,11 +22,15 @@ namespace ClaimSearchWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
             services.AddControllers();
             services.AddCors(options =>
             {
                 options.AddPolicy("_myAllowSpecificOrigins",
-                                  builder => builder.WithOrigins("http://localhost:4200/")
+                                  builder => builder.WithOrigins("*")
                                                     .AllowAnyHeader()
                                                     .AllowAnyMethod()
                                                     .AllowAnyOrigin()
