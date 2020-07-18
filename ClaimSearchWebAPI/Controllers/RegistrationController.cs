@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using StackExchange.Redis;
+using ClaimSearchWebAPI.Helper;
+using ClaimSearchWebAPI.Services;
 
 namespace ClaimSearchWebAPI.Controllers
 {
@@ -17,12 +19,17 @@ namespace ClaimSearchWebAPI.Controllers
     [Route("[controller]")]
     public class RegistrationController : ControllerBase
     {
-        private UserRegistrationContext dbContext = new UserRegistrationContext();
+        private IUserService _userService;
 
-        [AllowAnonymous]
-        [HttpPost]      
+        public RegistrationController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [Authorize(Roles = RoleDto.Admin)]
+        [HttpPost]
         //POST: /Registration
-        public IActionResult PostUser([FromBody]UserRegistrationModel user)
+        public IActionResult PostUser([FromBody] UserRegistrationDto userDto)
         {
             if (!ModelState.IsValid)
             {
@@ -30,31 +37,19 @@ namespace ClaimSearchWebAPI.Controllers
             }
             try
             {
-                var isExist = IsEmailExist(user.emailId);
+                var isExist = _userService.IsEmailExist(userDto.EmailId);
                 if (isExist)
                 {
                     return BadRequest(new { message = "User email is already exists." });
                 }
-                //user.password = Crypto.Hash(user.password);
-               // dbContext.Users.Add(user);
-               // dbContext.SaveChangesAsync();
+                _userService.RegisterUser(userDto);
             }
             catch (Exception e)
             {
-                return StatusCode(500, "Internal server error"); 
+                return StatusCode(500, "Internal server error");
             }
-            return Ok(user);
+            return Ok();
         }
-        private bool IsEmailExist(string emailID)
-        {
-            using (UserRegistrationContext dc = new UserRegistrationContext())
-            {
-                var v = dc.Users.Where(a => a.EmailId == emailID).FirstOrDefault();
-                return v != null;
-            }
-        }
-
-
 
     }
 }

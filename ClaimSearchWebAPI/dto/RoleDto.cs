@@ -1,6 +1,6 @@
 namespace ClaimSearchWebAPI.dto
 {
-    public static class Role
+    public static class RoleDto
     {
         public const string Admin = "Admin";
         public const string TPA = "TPA";

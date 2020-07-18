@@ -11,6 +11,7 @@ using ClaimSearchWebAPI.Models;
 using ClaimSearchWebAPI.Helper;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ClaimSearchWebAPI.Services
 {
@@ -19,6 +20,8 @@ namespace ClaimSearchWebAPI.Services
         UserDto Authenticate(string username, string password);
         IEnumerable<UserDto> GetAll();
         UserDto GetById(int id);
+        bool IsEmailExist(string EmailId);
+        bool RegisterUser(UserRegistrationDto userDto);
     }
 
     public class UserService : IUserService
@@ -99,6 +102,30 @@ namespace ClaimSearchWebAPI.Services
             //var user = _users.FirstOrDefault(x => x.Id == id);
             //return user.WithoutPassword();
             return null;
+        }
+
+        public bool IsEmailExist(string EmailId)
+        {
+            var v = dbContext.Users.Where(a => a.EmailId == EmailId).FirstOrDefault();
+            return v != null;
+        }
+
+        public bool RegisterUser(UserRegistrationDto userDto)
+        {
+            Users user = new Users
+            {
+                UserId = Guid.NewGuid(),
+                UserName = userDto.UserName,
+                EmailId = userDto.EmailId,
+                Password = Hash.CreateHash(userDto.Password, _appSettings.Salt),
+                RoleId = userDto.RoleId,
+                IsActive = "Y",
+                CreatedDate = DateTime.Now
+            };
+            dbContext.Users.Add(user);
+            dbContext.SaveChanges();
+
+            return true;
         }
     }
 }

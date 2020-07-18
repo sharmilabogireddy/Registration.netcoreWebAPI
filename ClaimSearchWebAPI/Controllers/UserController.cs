@@ -31,7 +31,7 @@ namespace ClaimSearchWebAPI.Controllers
             return Ok(user);
         }
 
-        [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = RoleDto.Admin)]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -44,7 +44,7 @@ namespace ClaimSearchWebAPI.Controllers
         {
             // only allow admins to access other user records
             var currentUserId = int.Parse(User.Identity.Name);
-            if (id != currentUserId && !User.IsInRole(Role.Admin))
+            if (id != currentUserId && !User.IsInRole(RoleDto.Admin))
                 return Forbid();
 
             var user =  _userService.GetById(id);

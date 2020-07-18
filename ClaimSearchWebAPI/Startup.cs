@@ -73,10 +73,11 @@ namespace ClaimSearchWebAPI
             }
 
             //app.UseHttpsRedirection();
-            app.UseAuthentication();
             app.UseRouting();
-            app.UseAuthorization();
             app.UseCors("_myAllowSpecificOrigins");
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
